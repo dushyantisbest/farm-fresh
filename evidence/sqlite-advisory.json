@@ -1,0 +1,14 @@
+{
+  "component": "SQLite",
+  "detected_version": "3.45.3",
+  "scope": "One vendor-documented defect, tracked under two IDs; matches upstream version ranges. Distributor backports need separate verification.",
+  "advisory_ids": [
+    "CVE-2025-3277",
+    "CVE-2025-29087"
+  ],
+  "affected_from": "3.44.0",
+  "fixed_in": "3.49.1",
+  "version_match": true,
+  "source": "https://sqlite.org/cves.html",
+  "release_note": "https://sqlite.org/releaselog/3_49_1.html"
+}

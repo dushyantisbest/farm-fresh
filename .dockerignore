@@ -1,0 +1,8 @@
+*
+!app.py
+!inventory.py
+!forecast.py
+!festival_history.csv
+!static/
+!static/**
+

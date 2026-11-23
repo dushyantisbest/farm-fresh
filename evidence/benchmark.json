@@ -1,0 +1,36 @@
+{
+  "platform": "Windows-11-10.0.22621-SP0",
+  "python": "3.13.1",
+  "dataset": "8 products; 14 seeded sales days; 5 warmups per scenario",
+  "results": [
+    {
+      "endpoint": "/api/dashboard",
+      "workers": 1,
+      "requests": 100,
+      "errors": 0,
+      "median_ms": 15.21,
+      "p95_ms": 27.43,
+      "requests_per_second": 71.9
+    },
+    {
+      "endpoint": "/api/dashboard",
+      "workers": 4,
+      "requests": 100,
+      "errors": 0,
+      "median_ms": 7.79,
+      "p95_ms": 9.58,
+      "requests_per_second": 487.4
+    },
+    {
+      "endpoint": "/api/order",
+      "workers": 4,
+      "requests": 40,
+      "errors": 0,
+      "median_ms": 25.53,
+      "p95_ms": 84.25,
+      "requests_per_second": 100.5
+    }
+  ],
+  "passed": true,
+  "generated_utc": "2026-11-23T09:39:23.377366+00:00"
+}

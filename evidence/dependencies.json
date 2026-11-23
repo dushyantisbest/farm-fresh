@@ -1,0 +1,22 @@
+{
+  "runtime_imports": [
+    "collections",
+    "contextlib",
+    "csv",
+    "datetime",
+    "forecast",
+    "http",
+    "inventory",
+    "json",
+    "math",
+    "os",
+    "pathlib",
+    "sqlite3",
+    "urllib"
+  ],
+  "third_party_imports": [],
+  "runtime_requirements": [],
+  "scope": "Python application imports and runtime manifest. Test dependencies and image packages require the CI advisory scanners.",
+  "passed": true,
+  "generated_utc": "2026-11-23T09:39:20.617667+00:00"
+}

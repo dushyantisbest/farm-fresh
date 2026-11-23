@@ -1,0 +1,79 @@
+test_fallback (test_forecast.ForecastTests.test_fallback) ... ok
+test_holdout (test_forecast.ForecastTests.test_holdout) ... ok
+test_recommendation_updates_after_order (test_forecast.ForecastTests.test_recommendation_updates_after_order) ... C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:43: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("INSERT INTO lots VALUES(?,?,?)", (pid, qty, today+timedelta(days=days)))
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:46: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("INSERT INTO sales VALUES(?,?,?)", (pid, units, today-timedelta(days=offset)))
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:53: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  quantities = db.execute("""
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:60: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  sales = dict(db.execute("SELECT product,SUM(qty) FROM sales WHERE day>=? AND day<? GROUP BY product", (week_start,today)))
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:73: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  totals = dict(db.execute("SELECT day,SUM(qty) FROM sales WHERE day BETWEEN ? AND ? GROUP BY day",(trend_start,today)))
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:123: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("INSERT INTO orders(product,qty,placed) VALUES(?,?,?)",(pid,qty,today))
+ok
+test_concurrent_sales (test_workflows.WorkflowTests.test_concurrent_sales) ... C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:127: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  lots = db.execute("SELECT rowid,qty FROM lots WHERE product=? AND qty>0 AND expiry>=? ORDER BY expiry,rowid",(pid,today)).fetchall()
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:137: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("INSERT INTO sales VALUES(?,?,?)",(pid,qty,today))
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 400 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "GET /api/dashboard HTTP/1.1" 200 -
+ok
+test_expired_lots_and_partial_fulfilment (test_workflows.WorkflowTests.test_expired_lots_and_partial_fulfilment) ... C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\tests\test_workflows.py:68: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("UPDATE lots SET expiry=? WHERE product=1",(date.today()-timedelta(days=1),))
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\tests\test_workflows.py:69: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("INSERT INTO lots VALUES(1,2,?)",(date.today(),))
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\tests\test_workflows.py:70: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("INSERT INTO lots VALUES(1,3,?)",(date.today()+timedelta(days=40),))
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 400 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "GET /api/dashboard HTTP/1.1" 200 -
+ok
+test_forecast_uses_closed_days (test_workflows.WorkflowTests.test_forecast_uses_closed_days) ... 127.0.0.1 - - [23/Nov/2026 15:09:19] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "GET /api/dashboard HTTP/1.1" 200 -
+ok
+test_http_validation (test_workflows.WorkflowTests.test_http_validation) ... 127.0.0.1 - - [23/Nov/2026 15:09:19] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 400 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 400 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 400 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 400 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 400 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/order HTTP/1.1" 400 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 415 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/sale HTTP/1.1" 403 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "GET /missing HTTP/1.1" 404 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "GET /app.js HTTP/1.1" 200 -
+ok
+test_new_product_validation_and_unique_name (test_workflows.WorkflowTests.test_new_product_validation_and_unique_name) ... 127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/product HTTP/1.1" 400 -
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:117: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("INSERT INTO lots VALUES(?,?,?)",(pid,qty,expiry_date(data)))
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/product HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "POST /api/product HTTP/1.1" 409 -
+127.0.0.1 - - [23/Nov/2026 15:09:19] "GET /api/dashboard HTTP/1.1" 200 -
+ok
+test_order_receipt_once (test_workflows.WorkflowTests.test_order_receipt_once) ... 127.0.0.1 - - [23/Nov/2026 15:09:20] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:20] "POST /api/order HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:20] "GET /api/dashboard HTTP/1.1" 200 -
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:110: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("INSERT INTO lots VALUES(?,?,?)",(order["product"],order["qty"],expiry_date(data)))
+C:\Users\dushy\Documents\Codex\2026-11-23\new-chat\inventory-dashboard\inventory.py:111: DeprecationWarning: The default date adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+  db.execute("UPDATE orders SET received=? WHERE id=?",(today,oid))
+127.0.0.1 - - [23/Nov/2026 15:09:20] "POST /api/receive HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:20] "POST /api/receive HTTP/1.1" 400 -
+127.0.0.1 - - [23/Nov/2026 15:09:20] "GET /api/dashboard HTTP/1.1" 200 -
+ok
+test_sale_and_reopen (test_workflows.WorkflowTests.test_sale_and_reopen) ... 127.0.0.1 - - [23/Nov/2026 15:09:20] "GET /api/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:20] "POST /api/sale HTTP/1.1" 200 -
+127.0.0.1 - - [23/Nov/2026 15:09:20] "GET /api/dashboard HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.756s
+
+OK
+2 original tests passed

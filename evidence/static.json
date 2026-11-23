@@ -1,0 +1,18 @@
+{
+  "files": [
+    "app.py",
+    "inventory.py",
+    "forecast.py",
+    "static/app.js"
+  ],
+  "rules": [
+    "dynamic code execution",
+    "shell or subprocess execution",
+    "unsafe deserialization",
+    "nonliteral SQL passed to execute",
+    "unsafe HTML or script sink in browser code"
+  ],
+  "findings": [],
+  "passed": true,
+  "generated_utc": "2026-11-23T09:39:20.612553+00:00"
+}
